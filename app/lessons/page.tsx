@@ -1,5 +1,3 @@
-'use client'
-
 import React from 'react';
 
 import { sampleLesson, LessonTranslation, Language } from '@/utils/lessons/loader';
@@ -8,7 +6,8 @@ import { LessonResource } from '@/components/lessons/resources';
 import { LessonQuizz } from '@/components/lessons/quizz';
 
 
-export default function Lesson({ currentLanguage = 'en' }: { currentLanguage: Language}) {
+export default function Lesson() {
+    const currentLanguage: Language = 'en';
     const lesson: LessonTranslation = sampleLesson.translations[currentLanguage];
 
     return (

@@ -1,3 +1,5 @@
+'use client'
+
 import { LessonTranslation, getTranslatedText, Language } from '@/utils/lessons/loader';
 import { ChevronRight } from 'lucide-react';
 import { useState } from 'react';
