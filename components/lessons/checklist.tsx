@@ -1,55 +1,55 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Alert } from "@/components/ui/alert";
-import { createClient } from "@/utils/supabase/client";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Lesson, Language } from "@/types/lesson";
+import { CheckListItem } from "./checklist-item";
+import { isAuthenticated } from "@/utils/supabase/auth";
+import { fetchProgress, saveProgress } from "@/utils/lessons/progress";
+
+function AuthRequired() {
+  return (
+    <Alert className="mb-4">
+      <AlertDescription>Sign in to track your progress!</AlertDescription>
+    </Alert>
+  );
+}
 
 interface LessonCheckListProps {
   lesson: Lesson;
   language: Language;
 }
 
-function CheckList({ lesson, language }: LessonCheckListProps) {
-  const supabase = createClient();
+export default function LessonCheckList({
+  lesson,
+  language,
+}: LessonCheckListProps) {
   const [checked, setChecked] = useState<string[]>([]);
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const [showAuthAlert, setShowAuthAlert] = useState<boolean>(false);
+  const [hasAuth, setHasAuth] = useState(false);
+  const [showAuthAlert, setShowAuthAlert] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const lessonId = lesson.id;
   const checkQuestions = lesson.translations[language].checkQuestions;
 
   useEffect(() => {
-    // Check authentication status
-    const checkSession = async () => {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-      setIsAuthenticated(!!session);
+    initializeChecklist();
+  }, [lesson.id]);
 
-      // If authenticated, load progress
-      if (session) {
-        loadProgress();
-      }
-    };
+  async function initializeChecklist() {
+    setIsLoading(true);
+    const auth = await isAuthenticated();
+    setHasAuth(auth);
 
-    checkSession();
-  }, []);
-
-  const loadProgress = async () => {
-    const { data: progress } = await supabase
-      .from("lesson_progress")
-      .select("completed_items")
-      .match({ lesson_id: lessonId })
-      .single();
-
-    if (progress) {
-      setChecked(progress.completed_items);
+    if (auth) {
+      const progress = await fetchProgress(lesson.id);
+      setChecked(progress.completedItems);
     }
-  };
 
-  const handleCheck = async (itemId: string) => {
-    if (!isAuthenticated) {
+    setIsLoading(false);
+  }
+
+  async function handleToggle(itemId: string) {
+    if (!hasAuth) {
       setShowAuthAlert(true);
       return;
     }
@@ -59,61 +59,37 @@ function CheckList({ lesson, language }: LessonCheckListProps) {
       : [...checked, itemId];
 
     setChecked(newChecked);
+    const isCompleted = newChecked.length === checkQuestions.length;
+    await saveProgress({
+      lessonId: lesson.id,
+      completedItems: newChecked,
+      isCompleted,
+    });
+  }
 
-    // Update progress in database
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    if (user) {
-      await supabase.from("lesson_progress").upsert(
-        {
-          user_id: user.id,
-          lesson_id: lessonId,
-          completed_items: newChecked,
-          is_completed: newChecked.length === checkQuestions.length,
-        },
-        {
-          onConflict: "user_id,lesson_id",
-        },
-      );
-    }
-  };
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
-  return (
-    <div className="space-y-4">
-      {showAuthAlert && (
-        <Alert className="mb-4">
-          <p>Sign in to track your progress!</p>
-        </Alert>
-      )}
-
-      {checkQuestions.map((checkQuestion) => (
-        <div key={checkQuestion.id} className="flex items-center space-x-2">
-          <input
-            type="checkbox"
-            checked={checked.includes(checkQuestion.id)}
-            onChange={() => handleCheck(checkQuestion.id)}
-            className="h-4 w-4"
-          />
-          <span>{checkQuestion.text}</span>
-        </div>
-      ))}
-
-      <div className="mt-4 text-sm text-gray-600">
-        Progress: {checked.length} / {checkQuestions.length}
-      </div>
-    </div>
-  );
-}
-
-function LessonCheckList({ lesson, language }: LessonCheckListProps) {
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden">
-      <div className="p-6">
-        <CheckList lesson={lesson} language={language} />
+      <div className="p-6 space-y-4">
+        {showAuthAlert && <AuthRequired />}
+
+        {checkQuestions.map((question) => (
+          <CheckListItem
+            key={question.id}
+            id={question.id}
+            text={question.text}
+            isChecked={checked.includes(question.id)}
+            onToggle={handleToggle}
+          />
+        ))}
+
+        <div className="mt-4 text-sm text-gray-600">
+          Progress: {checked.length} / {checkQuestions.length}
+        </div>
       </div>
     </div>
   );
 }
-
-export default LessonCheckList;
