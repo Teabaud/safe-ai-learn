@@ -1,0 +1,44 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "lessons": "Leçons",
+    "profile": "Profil",
+    "signOut": "Se déconnecter",
+    "theme": {
+      "light": "Clair",
+      "dark": "Sombre",
+      "system": "Système"
+    }
+  },
+  "landing": {
+    "title": "Apprendre la Sécurité de l'IA",
+    "subtitle": "Leçons interactives pour comprendre les concepts de sécurité de l'IA",
+    "start": "Commencer"
+  },
+  "lessons": {
+    "keyConcepts": "Concepts Clés",
+    "resources": "Ressources",
+    "questions": "Questions à Considérer",
+    "askAI": "Demander à l'Assistant IA",
+    "previousAnswers": "Vos Réponses Précédentes :",
+    "typeAnswer": "Tapez votre réponse ici...",
+    "submitAnswer": "Soumettre la Réponse",
+    "loading": "Chargement...",
+    "progress": "Progrès",
+    "anonUserMessage": "Connectez-vous pour suivre votre progrès !"
+  },
+  "auth": {
+    "login": "Se connecter",
+    "logout": "Se déconnecter",
+    "signup": "S'inscrire",
+    "email": "Adresse e-mail",
+    "password": "Mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "forgotPassword": "Mot de passe oublié",
+    "resetPassword": "Réinitialiser le mot de passe",
+    "noAccount": "Pas de compte ?",
+    "haveAccount": "Déjà un compte ?",
+    "signingUp": "Inscription en cours...",
+    "signingIn": "Connexion en cours..."
+  }
+}

@@ -1,14 +1,15 @@
 import React from "react";
-import { Lesson, Language } from "@/types/lesson";
+import { Lesson } from "@/types/lesson";
+import { Locale } from "@/locales.config";
+import { useTranslations, useLocale } from "next-intl";
 
-interface LessonSummaryProps {
-  lesson: Lesson;
-  language: Language;
-}
+interface LessonSummaryProps { lesson: Lesson; }
 
-export function LessonSummary({ lesson, language }: LessonSummaryProps) {
-  const title = lesson.translations[language].title;
-  const summary = lesson.translations[language].summary;
+export function LessonSummary({ lesson }: LessonSummaryProps) {
+  const t = useTranslations("lessons");
+  const locale = useLocale() as Locale;
+  const title = lesson.translations[locale].title;
+  const summary = lesson.translations[locale].summary;
 
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden">

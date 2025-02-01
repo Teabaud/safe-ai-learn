@@ -1,3 +1,5 @@
+import { Locale } from "@/locales.config";
+
 export type Resource = {
   title: string;
   url: string;
@@ -18,14 +20,8 @@ export type LessonTranslation = {
 
 export type Lesson = {
   id: string;
-  translations: Record<string, LessonTranslation>;
+  translations: Record<Locale, LessonTranslation>;
 };
-
-export type Language = "en" | "fr";
-
-export interface LessonComponentProps {
-  currentLanguage?: Language;
-}
 
 export interface LessonProgress {
   lessonId: string;
@@ -57,35 +53,6 @@ export interface Database {
     };
   };
 }
-
-export const getTranslatedText = (
-  key:
-    | "resources"
-    | "checkQuestions"
-    | "submitAnswer"
-    | "previousAnswers"
-    | "typeAnswer",
-  currentLanguage: Language,
-): string => {
-  const translations: Record<Language, Record<typeof key, string>> = {
-    en: {
-      resources: "Resources",
-      checkQuestions: "Questions",
-      submitAnswer: "Submit Answer",
-      previousAnswers: "Your Previous Answers:",
-      typeAnswer: "Type your answer here...",
-    },
-    fr: {
-      resources: "Ressources",
-      checkQuestions: "Questions",
-      submitAnswer: "Soumettre",
-      previousAnswers: "Vos réponses précédentes:",
-      typeAnswer: "Tapez votre réponse ici...",
-    },
-  };
-
-  return translations[currentLanguage][key];
-};
 
 export const sampleLesson: Lesson = {
   id: "1",

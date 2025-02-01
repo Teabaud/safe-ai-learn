@@ -2,34 +2,35 @@
 
 import { useState, useEffect } from "react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Lesson, Language } from "@/types/lesson";
+import { Lesson } from "@/types/lesson";
 import { CheckListItem } from "./checklist-item";
 import { isAuthenticated } from "@/utils/supabase/auth";
 import { fetchProgress, saveProgress } from "@/utils/lessons/progress";
+import { useLocale, useTranslations } from 'next-intl';
+import { Locale } from "@/locales.config";
 
 function AuthRequired() {
+  const t = useTranslations("lessons");
   return (
     <Alert className="mb-4">
-      <AlertDescription>Sign in to track your progress!</AlertDescription>
+      <AlertDescription>{t("anonUserMessage")}</AlertDescription>
     </Alert>
   );
 }
 
 interface LessonCheckListProps {
   lesson: Lesson;
-  language: Language;
 }
 
-export default function LessonCheckList({
-  lesson,
-  language,
-}: LessonCheckListProps) {
+function LessonCheckList({ lesson }: LessonCheckListProps) {
   const [checked, setChecked] = useState<string[]>([]);
   const [hasAuth, setHasAuth] = useState(false);
   const [showAuthAlert, setShowAuthAlert] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  const checkQuestions = lesson.translations[language].checkQuestions;
+  const t = useTranslations("lessons");
+  const locale = useLocale() as Locale;
+  const checkQuestions = lesson.translations[locale].checkQuestions;
 
   useEffect(() => {
     initializeChecklist();
@@ -68,7 +69,7 @@ export default function LessonCheckList({
   }
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div>{t("loading")}</div>;
   }
 
   return (
@@ -87,9 +88,11 @@ export default function LessonCheckList({
         ))}
 
         <div className="mt-4 text-sm text-gray-600">
-          Progress: {checked.length} / {checkQuestions.length}
+          {t('progress')}: {checked.length} / {checkQuestions.length}
         </div>
       </div>
     </div>
   );
 }
+
+export default LessonCheckList;

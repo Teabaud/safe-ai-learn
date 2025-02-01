@@ -1,7 +1,5 @@
-import { signOutAction } from "@/app/actions";
-import { hasEnvVars } from "@/utils/supabase/check-env-vars";
+import { signOutAction } from "@/app/[locale]/actions";
 import Link from "next/link";
-import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { createClient } from "@/utils/supabase/server";
 import {
@@ -13,8 +11,11 @@ import {
 } from "../ui/dropdown-menu";
 import { ChevronDownIcon } from "lucide-react";
 import { User } from "@supabase/supabase-js";
+import {useTranslations} from 'next-intl';
 
 function UserDropdown({ user }: { user: User }) {
+  const t = useTranslations("nav");
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -26,16 +27,16 @@ function UserDropdown({ user }: { user: User }) {
 
       <DropdownMenuContent align="end">
         <DropdownMenuItem asChild>
-          <Link href="/protected">Profile</Link>
+          <Link href="/protected">{t("profile")}</Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href="/lessons">Lessons</Link>
+          <Link href="/lessons">{t("lessons")}</Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <form action={signOutAction}>
           <DropdownMenuItem asChild>
             <button className="w-full text-left" type="submit">
-              Sign out
+              {t("signOut")}
             </button>
           </DropdownMenuItem>
         </form>
@@ -45,13 +46,15 @@ function UserDropdown({ user }: { user: User }) {
 }
 
 function SignInUp() {
+  const t = useTranslations("auth");
+
   return (
     <div className="flex gap-2">
       <Button asChild size="sm" variant={"outline"}>
-        <Link href="/sign-in">Sign in</Link>
+        <Link href="/sign-in">{t("login")}</Link>
       </Button>
       <Button asChild size="sm" variant={"default"}>
-        <Link href="/sign-up">Sign up</Link>
+        <Link href="/sign-up">{t("signup")}</Link>
       </Button>
     </div>
   );
@@ -63,21 +66,6 @@ export default async function AuthButton() {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-
-  if (!hasEnvVars) {
-    return (
-      <div className="flex gap-4 items-center">
-        <div>
-          <Badge
-            variant={"default"}
-            className="font-normal pointer-events-none"
-          >
-            Please update .env.local file with anon key and url
-          </Badge>
-        </div>
-      </div>
-    );
-  }
 
   return user ? <UserDropdown user={user} /> : <SignInUp />;
 }

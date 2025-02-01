@@ -1,0 +1,44 @@
+{
+  "nav": {
+    "home": "Home",
+    "lessons": "Lessons",
+    "profile": "Profile",
+    "signOut": "Sign Out",
+    "theme": {
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    }
+  },
+  "landing": {
+    "title": "Learn AI Safety",
+    "subtitle": "Interactive lessons to understand AI safety concepts",
+    "start": "Start Learning"
+  },
+  "lessons": {
+    "keyConcepts": "Key Concepts",
+    "resources": "Resources",
+    "questions": "Questions to Consider",
+    "askAI": "Ask AI Assistant",
+    "previousAnswers": "Your Previous Answers:",
+    "typeAnswer": "Type your answer here...",
+    "submitAnswer": "Submit Answer",
+    "loading": "Loading...",
+    "progress": "Progress",
+    "anonUserMessage": "Sign in to track your progress!"
+  },
+  "auth": {
+    "login": "Log In",
+    "logout": "Log Out",
+    "signup": "Sign Up",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "forgotPassword": "Forgot Password",
+    "resetPassword": "Reset Password",
+    "noAccount": "Don't have an account?",
+    "haveAccount": "Already have an account?",
+    "signingUp": "Signing Up...",
+    "signingIn": "Signing In..."
+  }
+}
