@@ -4,15 +4,19 @@ import Link from "next/link";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { createClient } from "@/utils/supabase/server";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
 import { ChevronDownIcon } from "lucide-react";
 import { User } from "@supabase/supabase-js";
-
 
 function UserDropdown({ user }: { user: User }) {
   return (
     <DropdownMenu>
-
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="sm">
           {user.email}
@@ -36,7 +40,6 @@ function UserDropdown({ user }: { user: User }) {
           </DropdownMenuItem>
         </form>
       </DropdownMenuContent>
-
     </DropdownMenu>
   );
 }
@@ -53,7 +56,6 @@ function SignInUp() {
     </div>
   );
 }
-
 
 export default async function AuthButton() {
   const supabase = await createClient();
@@ -77,9 +79,5 @@ export default async function AuthButton() {
     );
   }
 
-  return user ? (
-    <UserDropdown user={user}/>
-    ) : (
-    <SignInUp/>
-  );
+  return user ? <UserDropdown user={user} /> : <SignInUp />;
 }

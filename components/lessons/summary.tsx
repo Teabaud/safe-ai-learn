@@ -1,6 +1,5 @@
-import React from 'react';
-import { LessonTranslation } from '@/utils/lessons/loader';
-
+import React from "react";
+import { LessonTranslation } from "@/utils/lessons/loader";
 
 export function LessonSummary({ lesson }: { lesson: LessonTranslation }) {
   return (
