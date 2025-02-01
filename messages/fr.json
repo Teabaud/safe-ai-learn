@@ -25,7 +25,8 @@
     "submitAnswer": "Soumettre la Réponse",
     "loading": "Chargement...",
     "progress": "Progrès",
-    "anonUserMessage": "Connectez-vous pour suivre votre progrès !"
+    "anonUserMessage": "Connectez-vous pour suivre votre progrès !",
+    "noTranslation": "Aucune traduction disponible pour cette leçon."
   },
   "auth": {
     "login": "Se connecter",
