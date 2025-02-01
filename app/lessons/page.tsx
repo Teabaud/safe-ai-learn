@@ -5,6 +5,14 @@ import { LessonSummary } from '@/components/lessons/summary';
 import { LessonResource } from '@/components/lessons/resources';
 import { LessonQuizz } from '@/components/lessons/quizz';
 
+import { createClient } from '@/utils/supabase/server';
+  
+async function Page() {
+    const supabase = await createClient();
+    const { data } = await supabase.from('your_table').select();
+    // ... rest of your component
+  }
+  
 
 export default function Lesson() {
     const currentLanguage: Language = 'en';
