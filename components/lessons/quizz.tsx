@@ -1,24 +1,21 @@
 "use client";
 
-import {
-  LessonTranslation,
-  getTranslatedText,
-  Language,
-} from "@/utils/lessons/loader";
+import { Lesson, getTranslatedText, Language } from "@/types/lesson";
 import { ChevronRight } from "lucide-react";
 import { useState } from "react";
 
-export function LessonQuizz({
-  lesson,
-  language,
-}: {
-  lesson: LessonTranslation;
+interface LessonQuizzProps {
+  lesson: Lesson;
   language: Language;
-}) {
+}
+
+export function LessonQuizz({ lesson, language }: LessonQuizzProps) {
   const [currentQuestion, setCurrentQuestion] = useState<number>(0);
   const [answer, setAnswer] = useState<string>("");
   const [answers, setAnswers] = useState<string[]>([]);
-  const totalQuestions: number = lesson.questions.length;
+
+  const checkQuestions = lesson.translations[language].checkQuestions;
+  const totalQuestions: number = checkQuestions.length;
 
   const handleSubmitAnswer = (): void => {
     if (answer.trim()) {
@@ -34,12 +31,12 @@ export function LessonQuizz({
     <div className="bg-white rounded-lg shadow-md overflow-hidden">
       <div className="p-6">
         <h3 className="text-xl font-bold mb-4">
-          {getTranslatedText("questions", language)}
+          {getTranslatedText("checkQuestions", language)}
         </h3>
         <div className="space-y-4">
           <p className="font-medium">
             {currentQuestion + 1}/{totalQuestions}:{" "}
-            {lesson.questions[currentQuestion]}
+            {checkQuestions[currentQuestion].text}
           </p>
           <div className="space-y-2">
             <input
@@ -73,7 +70,7 @@ export function LessonQuizz({
               {answers.map((ans, index) => (
                 <div key={index} className="p-3 bg-gray-50 rounded">
                   <p className="font-medium text-sm text-gray-600">
-                    {lesson.questions[index]}
+                    {checkQuestions[index].text}
                   </p>
                   <p className="mt-1">{ans}</p>
                 </div>
@@ -85,3 +82,5 @@ export function LessonQuizz({
     </div>
   );
 }
+
+export default LessonQuizz;

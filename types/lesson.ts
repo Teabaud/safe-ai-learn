@@ -3,14 +3,20 @@ export type Resource = {
   url: string;
 };
 
+export type CheckQuestion = {
+  id: string;
+  text: string;
+};
+
 export type LessonTranslation = {
+  keyConcepts: string[];
   title: string;
   summary: string;
   resources: Resource[];
-  questions: string[];
+  checkQuestions: CheckQuestion[];
 };
 
-export type LessonContent = {
+export type Lesson = {
   id: string;
   translations: Record<string, LessonTranslation>;
 };
@@ -21,10 +27,41 @@ export interface LessonComponentProps {
   currentLanguage?: Language;
 }
 
+export interface LessonProgress {
+  lessonId: string;
+  userId: string;
+  completedItems: string[];
+  lastAccessed: Date;
+  isCompleted: boolean;
+}
+
+// Database types (for Supabase)
+export interface LessonProgressRow {
+  id: string;
+  user_id: string;
+  lesson_id: string;
+  completed_items: string[];
+  last_accessed: string;
+  is_completed: boolean;
+  created_at: string;
+}
+
+export interface Database {
+  public: {
+    Tables: {
+      lesson_progress: {
+        Row: LessonProgressRow;
+        Insert: Omit<LessonProgressRow, "id" | "created_at">;
+        Update: Partial<Omit<LessonProgressRow, "id" | "created_at">>;
+      };
+    };
+  };
+}
+
 export const getTranslatedText = (
   key:
     | "resources"
-    | "questions"
+    | "checkQuestions"
     | "submitAnswer"
     | "previousAnswers"
     | "typeAnswer",
@@ -33,14 +70,14 @@ export const getTranslatedText = (
   const translations: Record<Language, Record<typeof key, string>> = {
     en: {
       resources: "Resources",
-      questions: "Questions",
+      checkQuestions: "Questions",
       submitAnswer: "Submit Answer",
       previousAnswers: "Your Previous Answers:",
       typeAnswer: "Type your answer here...",
     },
     fr: {
       resources: "Ressources",
-      questions: "Questions",
+      checkQuestions: "Questions",
       submitAnswer: "Soumettre",
       previousAnswers: "Vos réponses précédentes:",
       typeAnswer: "Tapez votre réponse ici...",
@@ -50,24 +87,33 @@ export const getTranslatedText = (
   return translations[currentLanguage][key];
 };
 
-export const sampleLesson: LessonContent = {
+export const sampleLesson: Lesson = {
   id: "1",
   translations: {
     en: {
       title: "Introduction to AI Safety",
       summary: "This lesson covers the fundamental concepts of AI safety...",
+      keyConcepts: ["AI Alignment", "Value Learning", "Safety Fundamentals"],
       resources: [
         { title: "AI Safety Fundamentals", url: "https://example.com/1" },
         { title: "Technical AI Safety", url: "https://example.com/2" },
       ],
-      questions: [
-        "What do you understand by AI alignment?",
-        "How would you explain the concept of value learning?",
+      checkQuestions: [
+        { id: "q1", text: "What do you understand by AI alignment?" },
+        {
+          id: "q2",
+          text: "How would you explain the concept of value learning?",
+        },
       ],
     },
     fr: {
       title: "Introduction à la sécurité de l'IA",
       summary: "Cette leçon couvre les concepts fondamentaux...",
+      keyConcepts: [
+        "Alignement de l'IA",
+        "Apprentissage des valeurs",
+        "Fondamentaux de la sécurité",
+      ],
       resources: [
         {
           title: "Fondamentaux de la sécurité de l'IA",
@@ -75,9 +121,12 @@ export const sampleLesson: LessonContent = {
         },
         { title: "Sécurité technique de l'IA", url: "https://example.com/2" },
       ],
-      questions: [
-        "Que comprenez-vous par alignement de l'IA ?",
-        "Comment expliqueriez-vous le concept d'apprentissage des valeurs ?",
+      checkQuestions: [
+        { id: "q1", text: "Que comprenez-vous par alignement de l'IA ?" },
+        {
+          id: "q2",
+          text: "Comment expliqueriez-vous le concept d'apprentissage des valeurs ?",
+        },
       ],
     },
   },

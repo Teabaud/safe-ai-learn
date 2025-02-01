@@ -3,17 +3,21 @@
 import { useState, useEffect } from "react";
 import { Alert } from "@/components/ui/alert";
 import { createClient } from "@/utils/supabase/client";
+import { Lesson, Language } from "@/types/lesson";
 
-interface CheckListProps {
-  lessonId: string;
-  items: Array<{ id: string; text: string }>;
+interface LessonCheckListProps {
+  lesson: Lesson;
+  language: Language;
 }
 
-const CheckList = ({ lessonId, items }: CheckListProps) => {
+function CheckList({ lesson, language }: LessonCheckListProps) {
   const supabase = createClient();
   const [checked, setChecked] = useState<string[]>([]);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [showAuthAlert, setShowAuthAlert] = useState<boolean>(false);
+
+  const lessonId = lesson.id;
+  const checkQuestions = lesson.translations[language].checkQuestions;
 
   useEffect(() => {
     // Check authentication status
@@ -57,11 +61,22 @@ const CheckList = ({ lessonId, items }: CheckListProps) => {
     setChecked(newChecked);
 
     // Update progress in database
-    await supabase.from("lesson_progress").upsert({
-      lesson_id: lessonId,
-      completed_items: newChecked,
-      is_completed: newChecked.length === items.length,
-    });
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (user) {
+      await supabase.from("lesson_progress").upsert(
+        {
+          user_id: user.id,
+          lesson_id: lessonId,
+          completed_items: newChecked,
+          is_completed: newChecked.length === checkQuestions.length,
+        },
+        {
+          onConflict: "user_id,lesson_id",
+        },
+      );
+    }
   };
 
   return (
@@ -72,23 +87,33 @@ const CheckList = ({ lessonId, items }: CheckListProps) => {
         </Alert>
       )}
 
-      {items.map((item) => (
-        <div key={item.id} className="flex items-center space-x-2">
+      {checkQuestions.map((checkQuestion) => (
+        <div key={checkQuestion.id} className="flex items-center space-x-2">
           <input
             type="checkbox"
-            checked={checked.includes(item.id)}
-            onChange={() => handleCheck(item.id)}
+            checked={checked.includes(checkQuestion.id)}
+            onChange={() => handleCheck(checkQuestion.id)}
             className="h-4 w-4"
           />
-          <span>{item.text}</span>
+          <span>{checkQuestion.text}</span>
         </div>
       ))}
 
       <div className="mt-4 text-sm text-gray-600">
-        Progress: {checked.length} / {items.length}
+        Progress: {checked.length} / {checkQuestions.length}
       </div>
     </div>
   );
-};
+}
 
-export default CheckList;
+function LessonCheckList({ lesson, language }: LessonCheckListProps) {
+  return (
+    <div className="bg-white rounded-lg shadow-md overflow-hidden">
+      <div className="p-6">
+        <CheckList lesson={lesson} language={language} />
+      </div>
+    </div>
+  );
+}
+
+export default LessonCheckList;
