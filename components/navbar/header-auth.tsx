@@ -11,7 +11,7 @@ import {
 } from "../ui/dropdown-menu";
 import { ChevronDownIcon } from "lucide-react";
 import { User } from "@supabase/supabase-js";
-import {useTranslations} from 'next-intl';
+import { useTranslations } from "next-intl";
 
 function UserDropdown({ user }: { user: User }) {
   const t = useTranslations("nav");

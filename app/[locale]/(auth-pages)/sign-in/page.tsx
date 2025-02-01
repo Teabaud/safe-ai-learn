@@ -41,7 +41,7 @@ async function Login(props: LoginProps) {
           placeholder="Your password"
           required
         />
-        <SubmitButton pendingText={t('signingIn')} formAction={signInAction}>
+        <SubmitButton pendingText={t("signingIn")} formAction={signInAction}>
           {t("login")}
         </SubmitButton>
         <FormMessage message={searchParams} />

@@ -3,7 +3,9 @@ import { Lesson } from "@/types/lesson";
 import { Locale } from "@/locales.config";
 import { useTranslations, useLocale } from "next-intl";
 
-interface LessonSummaryProps { lesson: Lesson; }
+interface LessonSummaryProps {
+  lesson: Lesson;
+}
 
 export function LessonSummary({ lesson }: LessonSummaryProps) {
   const t = useTranslations("lessons");

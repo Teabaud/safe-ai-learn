@@ -6,7 +6,9 @@ import { useState } from "react";
 import { Locale } from "@/locales.config";
 import { useLocale, useTranslations } from "next-intl";
 
-interface LessonQuizzProps { lesson: Lesson; }
+interface LessonQuizzProps {
+  lesson: Lesson;
+}
 
 export function LessonQuizz({ lesson }: LessonQuizzProps) {
   const [currentQuestion, setCurrentQuestion] = useState<number>(0);

@@ -14,7 +14,7 @@ interface SignupProps {
 async function Signup(props: SignupProps) {
   const t = await getTranslations("auth");
   const searchParams = await props.searchParams;
-  
+
   if ("message" in searchParams) {
     return (
       <div className="w-full flex-1 flex items-center h-screen sm:max-w-md justify-center gap-2 p-4">
@@ -44,7 +44,10 @@ async function Signup(props: SignupProps) {
             minLength={6}
             required
           />
-          <SubmitButton formAction={signUpAction} pendingText="{t('signingUp')}">
+          <SubmitButton
+            formAction={signUpAction}
+            pendingText="{t('signingUp')}"
+          >
             {t("signup")}
           </SubmitButton>
           <FormMessage message={searchParams} />

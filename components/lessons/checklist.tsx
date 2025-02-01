@@ -6,7 +6,7 @@ import { Lesson } from "@/types/lesson";
 import { CheckListItem } from "./checklist-item";
 import { isAuthenticated } from "@/utils/supabase/auth";
 import { fetchProgress, saveProgress } from "@/utils/lessons/progress";
-import { useLocale, useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from "next-intl";
 import { Locale } from "@/locales.config";
 
 function AuthRequired() {
@@ -88,7 +88,7 @@ function LessonCheckList({ lesson }: LessonCheckListProps) {
         ))}
 
         <div className="mt-4 text-sm text-gray-600">
-          {t('progress')}: {checked.length} / {checkQuestions.length}
+          {t("progress")}: {checked.length} / {checkQuestions.length}
         </div>
       </div>
     </div>

@@ -12,26 +12,26 @@ interface ForgotPasswordProps {
 }
 
 async function ForgotPassword(props: ForgotPasswordProps) {
-  const t  = await getTranslations("auth");
+  const t = await getTranslations("auth");
   const searchParams = await props.searchParams;
-  
+
   return (
     <>
       <form className="flex-1 flex flex-col w-full gap-2 text-foreground [&>input]:mb-6 min-w-64 max-w-64 mx-auto">
         <div>
-          <h1 className="text-2xl font-medium">{t('resetPassword')}</h1>
+          <h1 className="text-2xl font-medium">{t("resetPassword")}</h1>
           <p className="text-sm text-secondary-foreground">
-            {t('haveAccount')}{" "}
+            {t("haveAccount")}{" "}
             <Link className="text-primary underline" href="/sign-in">
-              {t('login')}
+              {t("login")}
             </Link>
           </p>
         </div>
         <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8">
-          <Label htmlFor="email">{t('email')}</Label>
+          <Label htmlFor="email">{t("email")}</Label>
           <Input name="email" placeholder="you@example.com" required />
           <SubmitButton formAction={forgotPasswordAction}>
-            {t('resetPassword')}
+            {t("resetPassword")}
           </SubmitButton>
           <FormMessage message={searchParams} />
         </div>
