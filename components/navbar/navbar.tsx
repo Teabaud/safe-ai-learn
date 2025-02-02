@@ -16,9 +16,10 @@ export default async function Navbar() {
           <Link href={`/`}>{t("home")}</Link>
         </div>
         <div className="flex items-center gap-4">
-          {!hasEnvVars ? <EnvVarWarning /> : <HeaderAuth />}
+          <Link href={`/lessons`}>{t("lessons")}</Link>
         </div>
         <div className="flex items-center gap-4">
+          {!hasEnvVars ? <EnvVarWarning /> : <HeaderAuth />}
           <LanguageSwitcher />
           <ThemeSwitcher />
         </div>

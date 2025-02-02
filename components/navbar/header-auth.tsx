@@ -27,10 +27,7 @@ function UserDropdown({ user }: { user: User }) {
 
       <DropdownMenuContent align="end">
         <DropdownMenuItem asChild>
-          <Link href="/protected">{t("profile")}</Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <Link href="/lessons">{t("lessons")}</Link>
+          <Link href="/protected">{t("settings")}</Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <form action={signOutAction}>
