@@ -2,12 +2,11 @@
 
 import { useState, useEffect } from "react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Lesson } from "@/types/lesson";
+import { CheckpointSection } from "@/types/lesson";
 import { CheckListItem } from "./checklist-item";
 import { isAuthenticated } from "@/utils/supabase/auth";
-import { fetchProgress, saveProgress } from "@/utils/lessons/progress";
-import { useLocale, useTranslations } from "next-intl";
-import { Locale } from "@/locales.config";
+import { ProgressTracker } from "@/utils/lessons/progress";
+import { useTranslations } from "next-intl";
 
 function AuthRequired() {
   const t = useTranslations("lessons");
@@ -19,22 +18,26 @@ function AuthRequired() {
 }
 
 interface LessonCheckListProps {
-  lesson: Lesson;
+  lessonId: string;
+  checkpointsSection: CheckpointSection;
 }
 
-function LessonCheckList({ lesson }: LessonCheckListProps) {
+function LessonCheckList({
+  lessonId,
+  checkpointsSection,
+}: LessonCheckListProps) {
   const [checked, setChecked] = useState<string[]>([]);
   const [hasAuth, setHasAuth] = useState(false);
   const [showAuthAlert, setShowAuthAlert] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const progressTracker = new ProgressTracker();
 
   const t = useTranslations("lessons");
-  const locale = useLocale() as Locale;
-  const checkQuestions = lesson.translations[locale].checkQuestions;
+  const checkQuestions = checkpointsSection.items;
 
   useEffect(() => {
     initializeChecklist();
-  }, [lesson.id]);
+  }, [lessonId]);
 
   async function initializeChecklist() {
     setIsLoading(true);
@@ -42,8 +45,8 @@ function LessonCheckList({ lesson }: LessonCheckListProps) {
     setHasAuth(auth);
 
     if (auth) {
-      const progress = await fetchProgress(lesson.id);
-      setChecked(progress.completedItems);
+      const progress = await progressTracker.getLessonProgress(lessonId);
+      setChecked(progress.map((p) => p.checkpointId));
     }
 
     setIsLoading(false);
@@ -60,11 +63,10 @@ function LessonCheckList({ lesson }: LessonCheckListProps) {
       : [...checked, itemId];
 
     setChecked(newChecked);
-    const isCompleted = newChecked.length === checkQuestions.length;
-    await saveProgress({
-      lessonId: lesson.id,
-      completedItems: newChecked,
-      isCompleted,
+    await progressTracker.saveProgress({
+      lessonId: lessonId,
+      checkpointId: itemId,
+      completed: newChecked.includes(itemId),
     });
   }
 

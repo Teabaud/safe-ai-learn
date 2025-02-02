@@ -1,44 +1,46 @@
+"use client";
+
 import { createClient } from "@/utils/supabase/client";
+import { LessonProgress } from "@/types/lesson";
+import snakecaseKeys from "snakecase-keys";
+import camelcaseKeys from "camelcase-keys";
 
-const supabase = createClient();
+export class ProgressTracker {
+  private supabase = createClient();
 
-interface Progress {
-  lessonId: string;
-  completedItems: string[];
-  isCompleted: boolean;
-}
+  async saveProgress(
+    progress: Omit<LessonProgress, "lastUpdated" | "userId">,
+  ): Promise<void> {
+    const {
+      data: { user },
+    } = await this.supabase.auth.getUser();
+    if (!user) return;
 
-export async function fetchProgress(lessonId: string): Promise<Progress> {
-  const { data } = await supabase
-    .from("lesson_progress")
-    .select("completed_items")
-    .match({ lesson_id: lessonId })
-    .single();
-
-  const completedItems = data?.completed_items || [];
-  return { lessonId, completedItems, isCompleted: false };
-}
-
-export async function saveProgress({
-  lessonId,
-  completedItems,
-  isCompleted,
-}: Progress): Promise<void> {
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) return;
-
-  await supabase.from("lesson_progress").upsert(
-    {
+    const { error } = await this.supabase.from("lesson_progress").upsert({
+      ...snakecaseKeys(progress),
       user_id: user.id,
-      lesson_id: lessonId,
-      completed_items: completedItems,
-      is_completed: isCompleted,
-    },
-    {
-      onConflict: "user_id,lesson_id",
-    },
-  );
+      last_updated: new Date().toISOString(),
+    });
+
+    if (error) throw error;
+  }
+
+  async getLessonProgress(lessonId: string): Promise<LessonProgress[]> {
+    const {
+      data: { user },
+    } = await this.supabase.auth.getUser();
+    if (!user) return [];
+
+    const { data, error } = await this.supabase
+      .from("lesson_progress")
+      .select("*")
+      .eq("user_id", user.id)
+      .eq("lesson_id", lessonId)
+      .eq("completed", true);
+
+    if (error) throw error;
+    if (!data) return [];
+
+    return camelcaseKeys(data) as LessonProgress[];
+  }
 }

@@ -1,36 +1,21 @@
-import { Lesson, sampleLesson } from "@/types/lesson";
-import LessonCheckList from "@/components/lessons/checklist";
-import LessonSummary from "@/components/lessons/summary";
-import LessonResource from "@/components/lessons/resources";
-import LessonQuizz from "@/components/lessons/quizz";
-import { getLocale, getTranslations } from "next-intl/server";
+import { listLessons } from "@/utils/lessons/lessonLoader";
+import { getLocale } from "next-intl/server";
 import { Locale } from "@/locales.config";
+import { LessonCard } from "@/components/lessons/lesson-card";
 
-function getLesson(id: string): Lesson {
-  console.log(`Fetching lesson with id: ${id}`);
-  return sampleLesson;
-}
-
-interface LessonPageProps {
-  params: Promise<{ id: string }>;
-}
-
-export default async function LessonPage({ params }: LessonPageProps) {
-  const lessonId = (await params).id;
-  const lesson = getLesson(lessonId);
+export default async function LessonsPage() {
   const locale = (await getLocale()) as Locale;
-  const t = await getTranslations("lessons");
-
-  if (!lesson.translations.hasOwnProperty(locale)) {
-    return <div>{t("noTranslation")}</div>;
-  }
+  const lessonsRecord = await listLessons(locale);
+  const lessons = Object.values(lessonsRecord);
 
   return (
-    <div>
-      <LessonSummary lesson={sampleLesson} />
-      <LessonResource lesson={sampleLesson} />
-      <LessonQuizz lesson={sampleLesson} />
-      <LessonCheckList lesson={lesson} />
+    <div className="max-w-6xl mx-auto p-6">
+      <h1 className="text-3xl font-bold mb-8">Available Lessons</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {lessons.map((lesson) => (
+          <LessonCard key={lesson.id} lesson={lesson} />
+        ))}
+      </div>
     </div>
   );
 }

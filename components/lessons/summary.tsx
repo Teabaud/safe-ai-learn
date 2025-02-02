@@ -1,23 +1,19 @@
-import React from "react";
-import { Lesson } from "@/types/lesson";
-import { Locale } from "@/locales.config";
-import { useTranslations, useLocale } from "next-intl";
+import { SummarySection } from "@/types/lesson";
+import Markdown from "react-markdown";
+import { useTranslations } from "next-intl";
 
 interface LessonSummaryProps {
-  lesson: Lesson;
+  summary: SummarySection;
 }
 
-export function LessonSummary({ lesson }: LessonSummaryProps) {
+export function LessonSummary({ summary }: LessonSummaryProps) {
   const t = useTranslations("lessons");
-  const locale = useLocale() as Locale;
-  const title = lesson.translations[locale].title;
-  const summary = lesson.translations[locale].summary;
 
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden">
       <div className="p-6">
-        <h2 className="text-2xl font-bold mb-4">{title}</h2>
-        <p className="text-gray-600">{summary}</p>
+        <h2 className="text-2xl font-bold mb-4">{t("summary")}</h2>
+        <Markdown className="text-gray-600">{summary.text}</Markdown>
       </div>
     </div>
   );

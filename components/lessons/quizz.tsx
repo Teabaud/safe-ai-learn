@@ -1,23 +1,22 @@
 "use client";
 
-import { Lesson } from "@/types/lesson";
+import { CheckpointSection } from "@/types/lesson";
 import { ChevronRight } from "lucide-react";
 import { useState } from "react";
-import { Locale } from "@/locales.config";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
+import Markdown from "react-markdown";
 
 interface LessonQuizzProps {
-  lesson: Lesson;
+  checkpoints: CheckpointSection;
 }
 
-export function LessonQuizz({ lesson }: LessonQuizzProps) {
+export function LessonQuizz({ checkpoints }: LessonQuizzProps) {
   const [currentQuestion, setCurrentQuestion] = useState<number>(0);
   const [answer, setAnswer] = useState<string>("");
   const [answers, setAnswers] = useState<string[]>([]);
 
   const t = useTranslations("lessons");
-  const locale = useLocale() as Locale;
-  const checkQuestions = lesson.translations[locale].checkQuestions;
+  const checkQuestions = checkpoints.items;
   const totalQuestions: number = checkQuestions.length;
 
   const handleSubmitAnswer = (): void => {
@@ -34,32 +33,35 @@ export function LessonQuizz({ lesson }: LessonQuizzProps) {
     <div className="bg-white rounded-lg shadow-md overflow-hidden">
       <div className="p-6">
         <h3 className="text-xl font-bold mb-4">{t("questions")}</h3>
-        <div className="space-y-4">
-          <p className="font-medium">
-            {currentQuestion + 1}/{totalQuestions}:{" "}
-            {checkQuestions[currentQuestion].text}
-          </p>
-          <div className="space-y-2">
-            <input
-              type="text"
-              value={answer}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setAnswer(e.target.value)
-              }
-              placeholder={t("typeAnswer")}
-              className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <div className="flex justify-end">
-              <button
-                onClick={handleSubmitAnswer}
-                className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-              >
-                <span>{t("submitAnswer")}</span>
-                <ChevronRight className="w-4 h-4 ml-2" />
-              </button>
+
+        {/* Question */}
+        {answers.length < totalQuestions && (
+          <div className="space-y-4">
+            <Markdown className="font-medium text-gray-600">
+              {`${String(currentQuestion + 1)}/${String(totalQuestions)}: ${checkQuestions[currentQuestion].text}`}
+            </Markdown>
+            <div className="space-y-2">
+              <input
+                type="text"
+                value={answer}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setAnswer(e.target.value)
+                }
+                placeholder={t("typeAnswer")}
+                className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <div className="flex justify-end">
+                <button
+                  onClick={handleSubmitAnswer}
+                  className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                >
+                  <span>{t("submitAnswer")}</span>
+                  <ChevronRight className="w-4 h-4 ml-2" />
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* Previous Answers */}
         {answers.length > 0 && (
@@ -70,9 +72,9 @@ export function LessonQuizz({ lesson }: LessonQuizzProps) {
             <div className="space-y-2">
               {answers.map((ans, index) => (
                 <div key={index} className="p-3 bg-gray-50 rounded">
-                  <p className="font-medium text-sm text-gray-600">
+                  <Markdown className="font-medium text-sm text-gray-600">
                     {checkQuestions[index].text}
-                  </p>
+                  </Markdown>
                   <p className="mt-1">{ans}</p>
                 </div>
               ))}

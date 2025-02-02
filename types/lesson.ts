@@ -1,100 +1,118 @@
 import { Locale } from "@/locales.config";
 
-export type Resource = {
-  title: string;
-  url: string;
-};
+export type SectionType =
+  | "key-concepts"
+  | "summary"
+  | "resources"
+  | "checkpoints";
 
-export type CheckQuestion = {
+interface BaseSection {
+  type: SectionType;
+}
+
+// Template types - lesson structure
+interface KeyConceptsTemplate extends BaseSection {
+  type: "key-concepts";
+}
+
+interface SummaryTemplate extends BaseSection {
+  type: "summary";
+}
+
+interface ResourcesTemplate extends BaseSection {
+  type: "resources";
+  items: string[]; // Resource IDs
+}
+
+interface CheckpointsTemplate extends BaseSection {
+  type: "checkpoints";
+  items: string[]; // Checkpoint IDs
+}
+
+export type SectionTemplate =
+  | KeyConceptsTemplate
+  | SummaryTemplate
+  | ResourcesTemplate
+  | CheckpointsTemplate;
+
+export interface LessonTemplate {
   id: string;
+  order: number;
+  sections: Record<string, SectionTemplate>;
+}
+
+// Content types - actual lesson content
+export interface KeyConceptsSection extends BaseSection {
+  type: "key-concepts";
+  concepts: string[];
+}
+
+export interface SummarySection extends BaseSection {
+  type: "summary";
   text: string;
-};
+}
 
-export type LessonTranslation = {
-  keyConcepts: string[];
-  title: string;
-  summary: string;
-  resources: Resource[];
-  checkQuestions: CheckQuestion[];
-};
+export interface ResourceSection extends BaseSection {
+  type: "resources";
+  items: {
+    id: string;
+    title: string;
+    url: string;
+    details: string;
+  }[];
+}
 
-export type Lesson = {
+export interface CheckpointSection extends BaseSection {
+  type: "checkpoints";
+  items: {
+    id: string;
+    text: string;
+  }[];
+}
+
+export type Section =
+  | KeyConceptsSection
+  | SummarySection
+  | ResourceSection
+  | CheckpointSection;
+
+export interface Lesson {
   id: string;
-  translations: Record<Locale, LessonTranslation>;
-};
+  order: number;
+  title: string;
+  locale: Locale;
+  sections: Record<string, Section>;
+}
 
+// Progress tracking
 export interface LessonProgress {
-  lessonId: string;
   userId: string;
-  completedItems: string[];
-  lastAccessed: Date;
-  isCompleted: boolean;
+  lessonId: string;
+  checkpointId: string;
+  completed: boolean;
+  answer?: string;
+  lastUpdated: Date;
 }
 
 // Database types (for Supabase)
-export interface LessonProgressRow {
-  id: string;
-  user_id: string;
-  lesson_id: string;
-  completed_items: string[];
-  last_accessed: string;
-  is_completed: boolean;
-  created_at: string;
-}
+// export interface LessonProgressRow {
+//   id: string;
+//   user_id: string;
+//   lesson_id: string;
+//   completed_items: string[];
+//   last_accessed: string;
+//   is_completed: boolean;
+//   created_at: string;
+// }
 
-export interface Database {
-  public: {
-    Tables: {
-      lesson_progress: {
-        Row: LessonProgressRow;
-        Insert: Omit<LessonProgressRow, "id" | "created_at">;
-        Update: Partial<Omit<LessonProgressRow, "id" | "created_at">>;
-      };
-    };
-  };
-}
-
-export const sampleLesson: Lesson = {
-  id: "1",
-  translations: {
-    en: {
-      title: "Introduction to AI Safety",
-      summary: "This lesson covers the fundamental concepts of AI safety...",
-      keyConcepts: ["AI Alignment", "Value Learning", "Safety Fundamentals"],
-      resources: [
-        { title: "AI Safety Fundamentals", url: "https://example.com/1" },
-        { title: "Technical AI Safety", url: "https://example.com/2" },
-      ],
-      checkQuestions: [
-        { id: "q1", text: "What do you understand by AI alignment?" },
-        {
-          id: "q2",
-          text: "How would you explain the concept of value learning?",
-        },
-      ],
-    },
-    fr: {
-      title: "Introduction à la sécurité de l'IA",
-      summary: "Cette leçon couvre les concepts fondamentaux...",
-      keyConcepts: [
-        "Alignement de l'IA",
-        "Apprentissage des valeurs",
-        "Fondamentaux de la sécurité",
-      ],
-      resources: [
-        {
-          title: "Fondamentaux de la sécurité de l'IA",
-          url: "https://example.com/1",
-        },
-        { title: "Sécurité technique de l'IA", url: "https://example.com/2" },
-      ],
-      checkQuestions: [
-        { id: "q1", text: "Que comprenez-vous par alignement de l'IA ?" },
-        {
-          id: "q2",
-          text: "Comment expliqueriez-vous le concept d'apprentissage des valeurs ?",
-        },
-      ],
-    },
-  },
-};
+// export interface Database {
+//   public: {
+//     Tables: {
+//       lesson_progress: {
+//         Row: LessonProgressRow;
+//         Insert: Omit<LessonProgressRow, "id" | "created_at">;
+//         Update: Partial<Omit<LessonProgressRow, "id" | "created_at">>;
+//       };
+//     };
+//   };
+// }

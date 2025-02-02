@@ -1,5 +1,6 @@
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
+import Markdown from "react-markdown";
 
 interface CheckListItemProps {
   id: string;
@@ -25,7 +26,7 @@ export function CheckListItem({
         htmlFor={id}
         className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
       >
-        {text}
+        <Markdown className="text-gray-600">{text}</Markdown>
       </Label>
     </div>
   );
