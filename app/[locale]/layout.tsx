@@ -1,7 +1,4 @@
 import { NextIntlClientProvider } from "next-intl";
-import { ThemeProvider } from "next-themes";
-import Footer from "@/components/footer/footer";
-import Navbar from "@/components/navbar/navbar";
 import { getLocale, getMessages } from "next-intl/server";
 import { Geist } from "next/font/google";
 import "./globals.css";
@@ -21,18 +18,6 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-function MainLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <main className="min-h-screen flex flex-col items-center">
-      <div className="flex-1 w-full flex flex-col gap-20 items-center">
-        <Navbar />
-        <div className="flex flex-col gap-20 max-w-5xl p-5">{children}</div>
-        <Footer />
-      </div>
-    </main>
-  );
-}
-
 async function RootLayout({ children }: { children: React.ReactNode }) {
   const locale = await getLocale();
   const messages = await getMessages(); // Providing all messages to the client side is the easiest way to get started
@@ -45,14 +30,7 @@ async function RootLayout({ children }: { children: React.ReactNode }) {
     >
       <body className="bg-background text-foreground">
         <NextIntlClientProvider messages={messages} locale={locale}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <MainLayout>{children}</MainLayout>
-          </ThemeProvider>
+          {children}
         </NextIntlClientProvider>
       </body>
     </html>
