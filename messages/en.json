@@ -23,12 +23,15 @@
   "lessons": {
     "keyConcepts": "Key Concepts",
     "resources": "Resources",
-    "questions": "Questions to Consider",
+    "questions": "Check your understanding",
     "summary": "Summary",
     "askAI": "Ask AI Assistant",
     "previousAnswers": "Your Previous Answers:",
     "typeAnswer": "Type your answer here...",
     "submitAnswer": "Submit Answer",
+    "saveChanges": "Save Changes",
+    "cancel": "Cancel",
+    "close": "Close",
     "loading": "Loading...",
     "progress": "Progress",
     "anonUserMessage": "Sign in to track your progress",
@@ -36,7 +39,13 @@
     "lesson": "Lesson",
     "completed": "Completed",
     "continue": "Continue",
-    "notStarted": "Not Started"
+    "notStarted": "Not Started",
+    "howToUse": "How to use this quiz",
+    "quizInfo": {
+      "answering": "Click on any question to expand it and write your answer. You can edit your answers anytime.",
+      "completion": "Use the checkbox on the left to mark concepts you feel confident about. This helps track your progress.",
+      "saving": "Note: Currently, only completion status is saved to your profile. Answer saving will be available soon."
+    }
   },
   "auth": {
     "login": "Log In",

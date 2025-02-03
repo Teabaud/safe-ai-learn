@@ -8,6 +8,10 @@ export const createClient = () =>
 
 export const isAuthenticated = async () => {
   const supabase = createClient();
-  const session = await supabase.auth.getSession();
-  return !!session;
+  const { data, error } = await supabase.auth.getUser();
+  if (error) {
+    console.debug("Error getting user", error);
+    return false;
+  }
+  return !!data.user;
 };

@@ -5,11 +5,10 @@ import {
   SummarySection,
 } from "@/types/lesson";
 import { loadLesson } from "@/utils/lessons/lessonLoader";
-import LessonCheckList from "@/components/lessons/checklist";
 import LessonSummary from "@/components/lessons/summary";
 import LessonResource from "@/components/lessons/resources";
 import LessonKeyConcepts from "@/components/lessons/key-concepts";
-import LessonQuizz from "@/components/lessons/quizz";
+import LessonQuiz from "@/components/lessons/checkpoints";
 import { getLocale, getTranslations } from "next-intl/server";
 import { Locale } from "@/locales.config";
 
@@ -26,15 +25,7 @@ function renderSection(lessonId: string, section: any) {
       return <LessonResource resources={resources} />;
     case "checkpoints":
       const checkpoints = section as CheckpointSection;
-      return (
-        <div>
-          <LessonQuizz checkpoints={checkpoints} />
-          <LessonCheckList
-            lessonId={lessonId}
-            checkpointsSection={checkpoints}
-          />
-        </div>
-      );
+      return <LessonQuiz lessonId={lessonId} checkpoints={checkpoints} />;
     default:
       return null;
   }
