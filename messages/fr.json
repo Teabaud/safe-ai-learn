@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "title": "SAIL - Plateforme d'apprentissage sur la sécurité de l'IA",
+    "description": "Apprenez la sécurité de l'IA dans plusieurs langues"
+  },
   "nav": {
     "home": "Accueil",
     "theme": {

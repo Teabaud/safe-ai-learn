@@ -1,17 +1,23 @@
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 import { Geist } from "next/font/google";
+import { getTranslations } from "next-intl/server";
+import { Metadata } from "next";
 import "./globals.css";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "http://localhost:3000";
 
-export const metadata = {
-  metadataBase: new URL(defaultUrl),
-  title: "Next.js and Supabase Starter Kit",
-  description: "The fastest way to build apps with Next.js and Supabase",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("metadata");
+
+  return {
+    metadataBase: new URL(defaultUrl),
+    title: t("title"),
+    description: t("description"),
+  };
+}
 
 const geistSans = Geist({
   display: "swap",

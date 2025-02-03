@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "title": "SAIL - Safe AI Learning Platform",
+    "description": "Learn about AI safety in multiple languages"
+  },
   "nav": {
     "home": "Home",
     "theme": {

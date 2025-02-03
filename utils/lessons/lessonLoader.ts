@@ -4,7 +4,8 @@ import { readdir, readFile } from "fs/promises";
 import path from "path";
 import matter from "gray-matter";
 
-const lessonsDir = process.env.LESSONS_DIR || path.join(process.cwd(), "lessons");
+const lessonsDir =
+  process.env.LESSONS_DIR || path.join(process.cwd(), "lessons");
 
 async function loadTemplate(lessonId: string): Promise<LessonTemplate> {
   const templatePath = path.join(lessonsDir, lessonId, "template.json");
