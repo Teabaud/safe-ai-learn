@@ -292,7 +292,7 @@ const AboutPage = () => {
               <CardContent>
                 <div className="space-y-4">
                   <p>
-                    While I couldn't finish the entire project given the 20-hour
+                    While this project require more time than the 20-hour
                     timeframe, I'm genuinely excited about its potential. Here's
                     what I envision for the next steps:
                   </p>
