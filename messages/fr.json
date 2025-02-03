@@ -1,45 +1,122 @@
 {
   "nav": {
     "home": "Accueil",
-    "lessons": "Leçons",
-    "profile": "Profil",
-    "signOut": "Se déconnecter",
     "theme": {
-      "light": "Clair",
-      "dark": "Sombre",
+      "light": "Thème clair",
+      "dark": "Thème sombre",
       "system": "Système"
-    }
+    },
+    "lessons": "Tous les cours",
+    "about": "À propos",
+    "signIn": "Connexion",
+    "signUp": "Inscription",
+    "profile": "Mon espace",
+    "signOut": "Déconnexion"
   },
-  "landing": {
-    "title": "Apprendre la Sécurité de l'IA",
-    "subtitle": "Leçons interactives pour comprendre les concepts de sécurité de l'IA",
-    "start": "Commencer"
+  "footer": {
+    "contact": "Me contacter",
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions d'utilisation",
+    "rights": "Tous droits réservés",
+    "contactAriaLabel": "Me contacter par email"
   },
   "lessons": {
-    "keyConcepts": "Concepts Clés",
-    "resources": "Ressources",
-    "questions": "Questions à Considérer",
-    "askAI": "Demander à l'Assistant IA",
-    "previousAnswers": "Vos Réponses Précédentes :",
-    "typeAnswer": "Tapez votre réponse ici...",
-    "submitAnswer": "Soumettre la Réponse",
-    "loading": "Chargement...",
-    "progress": "Progrès",
-    "anonUserMessage": "Connectez-vous pour suivre votre progrès !",
-    "noTranslation": "Aucune traduction disponible pour cette leçon."
+    "keyConcepts": "Points clés",
+    "resources": "Pour aller plus loin",
+    "questions": "Testez vos connaissances",
+    "summary": "En bref",
+    "askAI": "Interroger l'assistant IA",
+    "previousAnswers": "Vos réponses précédentes :",
+    "typeAnswer": "Rédigez votre réponse...",
+    "submitAnswer": "Valider",
+    "saveChanges": "Enregistrer",
+    "cancel": "Annuler",
+    "close": "Fermer",
+    "loading": "Chargement en cours...",
+    "progress": "Progression",
+    "anonUserMessage": "Connectez-vous pour suivre votre progression",
+    "noTranslation": "Ce cours n'est pas encore traduit.",
+    "lesson": "Cours",
+    "completed": "Terminé",
+    "continue": "Reprendre",
+    "notStarted": "À commencer",
+    "howToUse": "Mode d'emploi",
+    "quizInfo": {
+      "answering": "Cliquez sur une question pour la développer et y répondre. Vous pourrez modifier vos réponses à tout moment.",
+      "completion": "Cochez la case à gauche pour marquer les concepts que vous maîtrisez. Cela permet de suivre votre progression.",
+      "saving": "Note : Actuellement, seul l'état d'avancement est sauvegardé dans votre profil. La sauvegarde des réponses sera bientôt disponible."
+    }
   },
   "auth": {
     "login": "Se connecter",
     "logout": "Se déconnecter",
-    "signup": "S'inscrire",
-    "email": "Adresse e-mail",
+    "signup": "Créer un compte",
+    "email": "Adresse email",
     "password": "Mot de passe",
     "confirmPassword": "Confirmer le mot de passe",
     "forgotPassword": "Mot de passe oublié",
     "resetPassword": "Réinitialiser le mot de passe",
-    "noAccount": "Pas de compte ?",
-    "haveAccount": "Déjà un compte ?",
-    "signingUp": "Inscription en cours...",
+    "noAccount": "Pas encore de compte ?",
+    "haveAccount": "Déjà inscrit(e) ?",
+    "signingUp": "Création du compte...",
     "signingIn": "Connexion en cours..."
+  },
+  "landing": {
+    "hero": {
+      "title": "SAIL",
+      "subtitle": "Safe AI Learn : Rendre accessible à tous les enjeux de sécurité de l'IA",
+      "cta": "Commencer"
+    },
+    "mission": {
+      "title": "Notre mission",
+      "description": "La compréhension des enjeux de sécurité de l'IA ne devrait pas être limitée par la barrière de la langue. Bien que la majorité des ressources soit en anglais, l'impact de l'IA est mondial. Chacun devrait pouvoir accéder aux concepts fondamentaux pour faire des choix éclairés sur son avenir."
+    },
+    "features": {
+      "languages": {
+        "title": "Multilingue",
+        "description": "Découvrez les enjeux de sécurité de l'IA dans votre langue maternelle pour mieux comprendre et vous approprier les concepts complexes."
+      },
+      "interactive": {
+        "title": "Apprentissage interactif",
+        "description": "Posez vos questions en cours d'apprentissage et obtenez des réponses immédiates grâce à notre assistant IA."
+      },
+      "progress": {
+        "title": "Suivi personnalisé",
+        "description": "Visualisez votre progression et célébrez vos réussites étape par étape."
+      },
+      "structured": {
+        "title": "Parcours structuré",
+        "description": "Des cours progressifs conçus pour construire des bases solides en sécurité de l'IA."
+      }
+    },
+    "howItWorks": {
+      "title": "Comment ça marche",
+      "step1": {
+        "title": "Créez votre compte",
+        "description": "Inscrivez-vous pour suivre votre progression et personnaliser votre apprentissage."
+      },
+      "step2": {
+        "title": "Choisissez votre parcours",
+        "description": "Sélectionnez parmi nos cours conçus pour construire votre compréhension pas à pas."
+      },
+      "step3": {
+        "title": "Apprenez en interagissant",
+        "description": "Lisez les résumés, échangez avec notre assistant IA et validez votre compréhension par des explications."
+      },
+      "step4": {
+        "title": "Suivez vos progrès",
+        "description": "Marquez les concepts acquis et observez votre progression cours après cours."
+      }
+    },
+    "bluedot": {
+      "title": "Évaluation BlueDot Impact",
+      "description": "Ce projet fait partie du cours BlueDot Impact sur l'alignement de l'IA. Les évaluateurs peuvent en savoir plus sur notre projet, notre méthodologie et notre impact.",
+      "cta": "En savoir plus"
+    },
+    "cta": {
+      "title": "Prêt à commencer l'aventure ?",
+      "description": "Rejoignez-nous pour comprendre les enjeux de sécurité de l'IA, un concept à la fois.",
+      "button": "Créer mon compte"
+    }
   }
 }

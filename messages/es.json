@@ -1,0 +1,122 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "theme": {
+      "light": "Claro",
+      "dark": "Oscuro",
+      "system": "Sistema"
+    },
+    "lessons": "Todas las Lecciones",
+    "about": "Acerca de",
+    "signIn": "Iniciar Sesión",
+    "signUp": "Registrarse",
+    "profile": "Perfil",
+    "signOut": "Cerrar Sesión"
+  },
+  "footer": {
+    "contact": "Contáctame",
+    "privacy": "Política de Privacidad",
+    "terms": "Términos de Servicio",
+    "rights": "Todos los Derechos Reservados",
+    "contactAriaLabel": "Contáctame por correo electrónico"
+  },
+  "lessons": {
+    "keyConcepts": "Conceptos Clave",
+    "resources": "Recursos útiles",
+    "questions": "¿Cuánto has aprendido?",
+    "summary": "Resumen",
+    "askAI": "Pregunta al Asistente de IA",
+    "previousAnswers": "Tus Respuestas Anteriores:",
+    "typeAnswer": "Escribe tu respuesta aquí...",
+    "submitAnswer": "Enviar Respuesta",
+    "saveChanges": "Guardar Cambios",
+    "cancel": "Cancelar",
+    "close": "Cerrar",
+    "loading": "Cargando...",
+    "progress": "Progreso",
+    "anonUserMessage": "Inicia sesión para seguir tu progreso",
+    "noTranslation": "No hay traducciones disponibles para esta lección.",
+    "lesson": "Lección",
+    "completed": "Completado",
+    "continue": "Continuar",
+    "notStarted": "No Iniciado",
+    "howToUse": "Cómo usar este cuestionario",
+    "quizInfo": {
+      "answering": "Pulsa sobre una pregunta para desplegarla y responder. Puedes modificar tus respuestas cuando quieras.",
+      "completion": "Marca la casilla junto a los conceptos que ya entiendes. Así podrás ver tu avance.",
+      "saving": "Nota: Actualmente, solo se guarda el estado de finalización en tu perfil. El guardado de respuestas estará disponible pronto."
+    }
+  },
+  "auth": {
+    "login": "Iniciar Sesión",
+    "logout": "Cerrar Sesión",
+    "signup": "Registrarse",
+    "email": "Correo Electrónico",
+    "password": "Contraseña",
+    "confirmPassword": "Confirmar Contraseña",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "resetPassword": "Restablecer contraseña",
+    "noAccount": "¿Primera vez aquí?",
+    "haveAccount": "¿Ya tienes cuenta?",
+    "signingUp": "Registrando...",
+    "signingIn": "Iniciando Sesión..."
+  },
+  "landing": {
+    "hero": {
+      "title": "SAIL",
+      "subtitle": "Safe AI Learn: Aprende sobre la Seguridad en IA de manera accesible",
+      "cta": "Comenzar a Aprender"
+    },
+    "mission": {
+      "title": "Mi Misión",
+      "description": "El saber sobre la Seguridad en IA no debe tener fronteras idiomáticas. Si bien la mayoría de recursos están en inglés, la IA nos afecta a todos. Por eso, creemos que todas las personas deben poder entender los conceptos básicos de la Seguridad en IA para decidir sobre su futuro."
+    },
+    "features": {
+      "languages": {
+        "title": "Múltiples Idiomas",
+        "description": "Accede al contenido sobre Seguridad en IA en tu idioma nativo, facilitando la comprensión y relación con conceptos complejos."
+      },
+      "interactive": {
+        "title": "Aprendizaje Interactivo",
+        "description": "Haz preguntas mientras aprendes y obtén feedback inmediato de un asistente de IA para profundizar tu comprensión."
+      },
+      "progress": {
+        "title": "Seguimiento del Progreso",
+        "description": "Visualiza tu avance con indicadores claros y celebra tus logros."
+      },
+      "structured": {
+        "title": "Aprendizaje Estructurado",
+        "description": "Lecciones claras y secuenciales diseñadas para principiantes para construir una base sólida en Seguridad en IA."
+      }
+    },
+    "howItWorks": {
+      "title": "Cómo Funciona",
+      "step1": {
+        "title": "Crea una Cuenta",
+        "description": "Regístrate para seguir tu progreso y personalizar tu experiencia de aprendizaje."
+      },
+      "step2": {
+        "title": "Elige tu Camino",
+        "description": "Selecciona entre nuestras lecciones diseñadas para construir tu comprensión paso a paso."
+      },
+      "step3": {
+        "title": "Aprende e Interactúa",
+        "description": "Lee resúmenes, haz preguntas a nuestro asistente de IA y valida tu comprensión a través de explicaciones."
+      },
+      "step4": {
+        "title": "Sigue tu Progreso",
+        "description": "Marca los temas que ya dominas y ve cómo avanzas en tu aprendizaje paso a paso."
+      }
+    },
+    "bluedot": {
+      "title": "Evaluación de Impacto BlueDot",
+      "description": "Este proyecto es parte del Curso de Desarrollo Responsable de IA de BlueDot Impact. Los evaluadores pueden conocer más sobre el proyecto, su metodología y su impacto.",
+      "cta": "Leer Más"
+    },
+    "cta": {
+      "title": "¿Te animas a empezar?",
+      "description": "Aprende sobre Seguridad en IA a tu ritmo.",
+      "button": "Crear cuenta"
+    }
+  }
+}
