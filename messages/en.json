@@ -1,14 +1,17 @@
 {
   "nav": {
     "home": "Home",
-    "lessons": "Lessons",
-    "settings": "Settings",
-    "signOut": "Sign Out",
     "theme": {
       "light": "Light",
       "dark": "Dark",
       "system": "System"
-    }
+    },
+    "lessons": "Lessons",
+    "about": "About",
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "profile": "Profile",
+    "signOut": "Sign Out"
   },
   "lessons": {
     "keyConcepts": "Key Concepts",

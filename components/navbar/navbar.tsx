@@ -1,29 +1,65 @@
-import HeaderAuth from "@/components/navbar/header-auth";
 import { ThemeSwitcher } from "@/components/navbar/theme-switcher";
-import { EnvVarWarning } from "@/components/navbar/env-var-warning";
-import { hasEnvVars } from "@/utils/supabase/check-env-vars";
-import Link from "next/link";
 import LanguageSwitcher from "@/components/navbar/locale-switcher";
-import { getTranslations } from "next-intl/server";
+import { useTranslations } from "next-intl";
+import { Button } from "@/components/ui/button";
+import { Link } from "@/i18n/routing";
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuList,
+} from "@/components/ui/navigation-menu";
+import UserNav from "./user-nav";
+import { ShipWheel, Book, Info } from "lucide-react";
 
-export default async function Navbar() {
-  const t = await getTranslations("nav");
+export function NavBar() {
+  const t = useTranslations("nav");
 
   return (
-    <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
-      <div className="w-full max-w-5xl flex justify-between items-center p-3 px-5 text-sm">
-        <div className="flex gap-5 items-center font-semibold">
-          <Link href={`/`}>{t("home")}</Link>
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container flex h-14 items-center justify-between">
+        {/* Left section */}
+        <div className="flex items-center">
+          <NavigationMenu>
+            <NavigationMenuList>
+              <NavigationMenuItem>
+                <Link href="/" className="flex items-center space-x-2">
+                  <ShipWheel className="h-6 w-6" />
+                  <span className="font-bold">SAIL</span>
+                </Link>
+              </NavigationMenuItem>
+
+              <NavigationMenuItem>
+                <Link
+                  href="/about"
+                  className="flex items-center space-x-2 px-4 py-2"
+                >
+                  <Info className="h-4 w-4" />
+                  <span>{t("about")}</span>
+                </Link>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
         </div>
-        <div className="flex items-center gap-4">
-          <Link href={`/lessons`}>{t("lessons")}</Link>
+
+        {/* Center section - Lessons button */}
+        <div className="absolute left-1/2 transform -translate-x-1/2">
+          <Link href="/lessons">
+            <Button variant="default" className="gap-2">
+              <Book className="h-4 w-4" />
+              {t("lessons")}
+            </Button>
+          </Link>
         </div>
-        <div className="flex items-center gap-4">
-          {!hasEnvVars ? <EnvVarWarning /> : <HeaderAuth />}
+
+        {/* Right section */}
+        <div className="flex items-center space-x-4">
           <LanguageSwitcher />
           <ThemeSwitcher />
+          <UserNav />
         </div>
       </div>
-    </nav>
+    </header>
   );
 }
+
+export default NavBar;
