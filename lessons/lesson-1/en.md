@@ -1,33 +1,43 @@
 ---
-title: Introduction to AI Safety
+title: AI and the Years Ahead
 lessonId: lesson-1
 language: en
 ---
 
 # [s1] Key Concepts
 
-- Alignment Problem
-- Value Learning
-- Robustness
-- Interpretability
+- Neural Networks and Deep Learning
+- Gradient Descent
+- Large Language Models (LLMs)
+- Model Training and Fine-tuning
+- AI Capabilities and Limitations
+- Transformative AI Development
+- Hardware and Computational Advances
 
 # [s2] Summary
 
-AI Safety is a crucial field that focuses on ensuring artificial intelligence systems behave in ways that are beneficial and aligned with human values. This lesson introduces key concepts and challenges in the field.
+This lesson explores the fundamental concepts behind modern artificial intelligence systems and their potential future development. We examine how current AI systems are built, trained, and deployed, while considering their increasing impact on society and the economy.
 
-As AI systems become more powerful and autonomous, ensuring their safe and reliable operation becomes increasingly important. We'll explore fundamental concepts and practical approaches to building safer AI systems.
+AI systems have evolved rapidly through advances in neural networks, training techniques, and computational power. Understanding these foundations is crucial for grasping both the current state of AI technology and its potential future trajectory. We'll explore key technical concepts, development approaches, and the broader implications of AI advancement.
 
 # [s3] Resources
 
-- [r1] [Concrete Problems in AI Safety](https://arxiv.org/abs/1606.06565)
-  A foundational paper introducing key technical problems in _AI safety research_.
+- [r1] [AI and Its Impacts: A Brief Introduction](https://aisafetyfundamentals.com/blog/ai-and-its-impacts/)
+  A comprehensive overview of AI's role in society and the economy (6 min read)
 
-- [r2] [AI Safety Fundamentals](https://aisafetyfundamentals.com/)
-  A comprehensive introduction to AI safety concepts and challenges.
+- [r2] [Neural Networks Explained](https://www.3blue1brown.com/lessons/neural-networks)
+  Visual explanation of neural networks fundamentals by 3Blue1Brown (17 min video)
+
+- [r3] [Introduction to Large Language Models](https://www.youtube.com/watch?v=zjkBMFhNj_g)
+  Detailed exploration of LLM architecture and training by Andrej Karpathy (60 min video)
+
+- [r4] [Visualizing the Deep Learning Revolution](https://medium.com/@richardcngo/visualizing-the-deep-learning-revolution-722098eb9c5)
+  Overview of recent AI progress and capabilities (15 min read)
 
 # [s4] Checkpoints
 
-- [c1] Can you explain the _alignment problem_ in your own words?
-- [c2] What are the main challenges in making AI systems robust?
-- [c3] How does value learning relate to AI safety?
-- [c4] Why is interpretability important for AI safety?
+- [c1] Can you explain how neural networks learn using gradient descent?
+- [c2] What are the key components that have enabled recent advances in AI capabilities?
+- [c3] How do large language models differ from traditional AI systems?
+- [c4] What are the main economic and non-economic incentives driving AI development?
+- [c5] How might AI systems impact various industries and jobs in the next decade?

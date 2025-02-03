@@ -271,8 +271,7 @@ const AboutPage = () => {
                     <ul className="list-disc pl-6 space-y-2">
                       <li>
                         {" "}
-                        Creating first lesson content (target: completion before
-                        deadline){" "}
+                        Finishing the first lesson content {" "}
                       </li>
                       <li>
                         {" "}
@@ -298,11 +297,7 @@ const AboutPage = () => {
                     what I envision for the next steps:
                   </p>
                   <ul className="list-disc pl-6 space-y-2">
-                    <li>
-                      Complete the first set of fundamental AI safety lessons,
-                      building on the excellent content from the BlueDot Impact
-                      course
-                    </li>
+                    <li>Complete the first set of fundamental AI safety lessons</li>
                     <li>Implement the LLM features for interactive learning</li>
                     <li>Add more language options beyond the initial set</li>
                     <li>Build a community of translators and contributors</li>

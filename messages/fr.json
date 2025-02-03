@@ -20,6 +20,14 @@
     "rights": "Tous droits réservés",
     "contactAriaLabel": "Me contacter par email"
   },
+  "attribution": {
+    "title": "Attribution du Contenu de Démonstration",
+    "description": {
+      "before": "Le contenu du cours actuellement affiché provient du",
+      "linkText": "Cours BlueDot Impact",
+      "after": "et est utilisé ici uniquement à des fins de démonstration. Ce contenu aide à illustrer les capacités éducatives de la plateforme SAIL. Je ne suis pas affilié à BlueDot Impact et cette implémentation sert purement de démonstration technique."
+    }
+  },
   "lessons": {
     "keyConcepts": "Points clés",
     "resources": "Pour aller plus loin",
