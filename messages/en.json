@@ -6,12 +6,19 @@
       "dark": "Dark",
       "system": "System"
     },
-    "lessons": "Lessons",
+    "lessons": "All Lessons",
     "about": "About",
     "signIn": "Sign In",
     "signUp": "Sign Up",
     "profile": "Profile",
     "signOut": "Sign Out"
+  },
+  "footer": {
+    "contact": "Contact Me",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "rights": "All Rights Reserved",
+    "contactAriaLabel": "Contact me via email"
   },
   "lessons": {
     "keyConcepts": "Key Concepts",
@@ -52,8 +59,8 @@
       "cta": "Start Learning"
     },
     "mission": {
-      "title": "Our Mission",
-      "description": "AI Safety knowledge shouldn't be limited by language barriers. While most resources are in English, AI's impact is global. We believe everyone deserves access to fundamental AI Safety concepts to make informed decisions about their future."
+      "title": "My Mission",
+      "description": "AI Safety knowledge shouldn't be limited by language barriers. While most resources are in English, AI's impact is global. I believe everyone deserves access to fundamental AI Safety concepts to make informed decisions about their future."
     },
     "features": {
       "languages": {
@@ -94,12 +101,12 @@
     },
     "bluedot": {
       "title": "BlueDot Impact Evaluation",
-      "description": "This project is part of the BlueDot Impact AI Alignment Course. Evaluators can learn more about our mission, methodology, and impact.",
+      "description": "This project is part of the BlueDot Impact AI Alignment Course. Evaluators can learn more about my project, methodology, and impact.",
       "cta": "Read More"
     },
     "cta": {
       "title": "Ready to Start Your Journey?",
-      "description": "Join us in understanding AI Safety, one concept at a time.",
+      "description": "Join me in understanding AI Safety, one concept at a time.",
       "button": "Create Account"
     }
   }
