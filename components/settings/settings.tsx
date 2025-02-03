@@ -1,20 +1,17 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { createClient } from '@/utils/supabase/client';
-import { 
-  Alert, 
-  AlertDescription 
-} from '@/components/ui/alert';
-import { 
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { createClient } from "@/utils/supabase/client";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import {
   Card,
   CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle
-} from '@/components/ui/card';
+  CardTitle,
+} from "@/components/ui/card";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -25,34 +22,34 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from '@/components/ui/alert-dialog';
+} from "@/components/ui/alert-dialog";
 
 const UserSettings = () => {
-  const [email, setEmail] = useState('');
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  
+
   const router = useRouter();
   const supabase = createClient();
 
   const handleEmailUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    setError('');
-    setSuccess('');
+    setError("");
+    setSuccess("");
 
     try {
-      const { error: updateError } = await supabase.auth.updateUser({ 
-        email: email 
+      const { error: updateError } = await supabase.auth.updateUser({
+        email: email,
       });
 
       if (updateError) throw updateError;
 
-      setSuccess('Email update request sent. Please check your inbox.');
-      setEmail('');
+      setSuccess("Email update request sent. Please check your inbox.");
+      setEmail("");
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to update email');
+      setError(err instanceof Error ? err.message : "Failed to update email");
     } finally {
       setIsLoading(false);
     }
@@ -60,28 +57,28 @@ const UserSettings = () => {
 
   const handleDeleteAccount = async () => {
     setIsLoading(true);
-    setError('');
+    setError("");
 
     try {
       // First delete user data from lesson_progress
       const { error: deleteProgressError } = await supabase
-        .from('lesson_progress')
+        .from("lesson_progress")
         .delete()
-        .eq('user_id', (await supabase.auth.getUser()).data.user?.id);
+        .eq("user_id", (await supabase.auth.getUser()).data.user?.id);
 
       if (deleteProgressError) throw deleteProgressError;
 
       // Then delete the user account
       const { error: deleteUserError } = await supabase.auth.admin.deleteUser(
-        (await supabase.auth.getUser()).data.user?.id || ''
+        (await supabase.auth.getUser()).data.user?.id || "",
       );
 
       if (deleteUserError) throw deleteUserError;
 
       await supabase.auth.signOut();
-      router.push('/');
+      router.push("/");
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to delete account');
+      setError(err instanceof Error ? err.message : "Failed to delete account");
     } finally {
       setIsLoading(false);
     }
@@ -96,15 +93,15 @@ const UserSettings = () => {
             Manage your account settings and preferences
           </CardDescription>
         </CardHeader>
-        
+
         <CardContent className="space-y-6">
           {/* Email Update Section */}
           <div>
             <h3 className="text-lg font-medium mb-4">Update Email</h3>
             <form onSubmit={handleEmailUpdate} className="space-y-4">
               <div>
-                <label 
-                  htmlFor="email" 
+                <label
+                  htmlFor="email"
                   className="block text-sm font-medium text-gray-700 dark:text-gray-300"
                 >
                   New Email Address
@@ -123,7 +120,7 @@ const UserSettings = () => {
                 disabled={isLoading}
                 className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
               >
-                {isLoading ? 'Updating...' : 'Update Email'}
+                {isLoading ? "Updating..." : "Update Email"}
               </button>
             </form>
           </div>
@@ -141,8 +138,8 @@ const UserSettings = () => {
                 <AlertDialogHeader>
                   <AlertDialogTitle>Are you sure?</AlertDialogTitle>
                   <AlertDialogDescription>
-                    This action cannot be undone. This will permanently delete your
-                    account and remove all your data from our servers.
+                    This action cannot be undone. This will permanently delete
+                    your account and remove all your data from our servers.
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
@@ -151,7 +148,7 @@ const UserSettings = () => {
                     onClick={handleDeleteAccount}
                     className="bg-red-600 hover:bg-red-700"
                   >
-                    {isLoading ? 'Deleting...' : 'Delete Account'}
+                    {isLoading ? "Deleting..." : "Delete Account"}
                   </AlertDialogAction>
                 </AlertDialogFooter>
               </AlertDialogContent>

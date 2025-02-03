@@ -89,6 +89,11 @@
         "description": "Mark concepts as learned and watch your knowledge grow lesson by lesson."
       }
     },
+    "bluedot": {
+      "title": "BlueDot Impact Evaluation",
+      "description": "This project is part of the BlueDot Impact AI Alignment Course. Evaluators can learn more about our mission, methodology, and impact.",
+      "cta": "Read More"
+    },
     "cta": {
       "title": "Ready to Start Your Journey?",
       "description": "Join us in understanding AI Safety, one concept at a time.",

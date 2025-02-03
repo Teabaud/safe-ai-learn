@@ -20,7 +20,7 @@ As AI systems become more powerful and autonomous, ensuring their safe and relia
 # [s3] Resources
 
 - [r1] [Concrete Problems in AI Safety](https://arxiv.org/abs/1606.06565)
-  A foundational paper introducing key technical problems in *AI safety research*.
+  A foundational paper introducing key technical problems in _AI safety research_.
 
 - [r2] [AI Safety Fundamentals](https://aisafetyfundamentals.com/)
   A comprehensive introduction to AI safety concepts and challenges.
