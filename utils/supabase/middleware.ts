@@ -37,7 +37,10 @@ export const updateSession = async (request: NextRequest) => {
 
   // protected routes
   const pathname = request.nextUrl.pathname;
-  const pathWithoutLocale = pathname.replace(/^\/[a-zA-Z]{2}(?:-[a-zA-Z]{2})?/, '');
+  const pathWithoutLocale = pathname.replace(
+    /^\/[a-zA-Z]{2}(?:-[a-zA-Z]{2})?/,
+    "",
+  );
 
   if (pathWithoutLocale.startsWith("/protected") && user.error) {
     return NextResponse.redirect(new URL("/sign-in", request.url));

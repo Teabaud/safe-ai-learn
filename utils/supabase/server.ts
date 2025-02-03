@@ -27,3 +27,9 @@ export const createClient = async () => {
     },
   );
 };
+
+export const isAuthenticated = async () => {
+  const supabase = await createClient();
+  const session = await supabase.auth.getSession();
+  return !!session;
+};

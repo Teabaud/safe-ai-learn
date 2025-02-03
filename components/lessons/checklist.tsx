@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { CheckpointSection } from "@/types/lesson";
 import { CheckListItem } from "./checklist-item";
-import { isAuthenticated } from "@/utils/supabase/auth";
+import { isAuthenticated } from "@/utils/supabase/client";
 import { ProgressTracker } from "@/utils/lessons/progress";
 import { useTranslations } from "next-intl";
 

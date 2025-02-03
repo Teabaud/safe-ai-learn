@@ -5,7 +5,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { ArrowRight, CheckCircle, Circle } from "lucide-react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { isAuthenticated } from "@/utils/supabase/auth";
+import { isAuthenticated } from "@/utils/supabase/client";
 import { ProgressTracker } from "@/utils/lessons/progress";
 import { Lesson } from "@/types/lesson";
 
