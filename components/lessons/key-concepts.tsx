@@ -13,12 +13,7 @@ export function LessonResource({ keyConcepts }: LessonKeyConceptsProps) {
       <div className="p-6">
         <h3 className="text-xl font-bold mb-4">{t("keyConcepts")}</h3>
         <span className="flex items-center space-x-2 text-gray-600">
-          {keyConcepts.concepts.map((keyConcept, index) => (
-            <span key={index}>
-              {keyConcept}
-              {index < keyConcepts.concepts.length - 1 && ", "}
-            </span>
-          ))}
+          {keyConcepts.concepts.join(", ")}
         </span>
       </div>
     </div>
