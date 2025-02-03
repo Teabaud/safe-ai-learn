@@ -269,10 +269,7 @@ const AboutPage = () => {
                       Current Focus
                     </h3>
                     <ul className="list-disc pl-6 space-y-2">
-                      <li>
-                        {" "}
-                        Finishing the first lesson content {" "}
-                      </li>
+                      <li> Finishing the first lesson content </li>
                       <li>
                         {" "}
                         Implementing LLM features for interactive learning{" "}
@@ -297,7 +294,9 @@ const AboutPage = () => {
                     what I envision for the next steps:
                   </p>
                   <ul className="list-disc pl-6 space-y-2">
-                    <li>Complete the first set of fundamental AI safety lessons</li>
+                    <li>
+                      Complete the first set of fundamental AI safety lessons
+                    </li>
                     <li>Implement the LLM features for interactive learning</li>
                     <li>Add more language options beyond the initial set</li>
                     <li>Build a community of translators and contributors</li>
